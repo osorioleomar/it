@@ -1,0 +1,15 @@
+.faq-content{
+	border-radius: 0;
+	margin-top:100px;
+	padding-left:100px
+
+}
+.faq-category{
+	padding-top: 100px;
+	background-color: white;
+	box-shadow: 5px 16px 15px;
+	/*margin-left: 10px;*/
+}
+p.content{
+	white-space: pre-line;
+}
