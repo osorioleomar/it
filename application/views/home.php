@@ -172,7 +172,13 @@
     <!-- <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> -->
     <script src="assets/js/custom.js" type="text/javascript"></script>
     <script src="assets/js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>
+        tinymce.init({ 
+            selector:'textarea',
+            plugins: 'fullscreen image textcolor print preview searchreplace table code',
+            toolbar: 'forecolor backcolor insert code table',
+        });
+    </script>
     <script type="text/javascript">
 
         /*
