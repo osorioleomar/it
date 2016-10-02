@@ -141,11 +141,16 @@
 				<input type="text" class="form-control" id="search">
 			</div>
             <div class="subjects"></div>
-		</div>
+		</div>     
+
 		<div class="col-xs-9 faq-content">
             <button class="btn btn-primary btn-raised" id="newfaq">Add New</button>
             <button class="btn btn-success btn-raised" id="save">Save</button>
             <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
+
+            <!-- loading image that should show on every AJAX calls -->
+            <img src="assets/images/loading.gif" class"loading" hidden >
+
             <div id="new">
                 <input id="subject" class="form-control" placeholder="Enter the title of this workaround" />
                 <textarea id="content" rows="20" class="form-control" placeholder="Start typing your solution here."></textarea>
@@ -156,6 +161,7 @@
             </div>
 		</div>
 	</div>
+    <!-- these are the container divs for different modules -->
     <div id="container-active-ip" class="container"></div>
     <div id="container-devices" class="container"></div>
     <div id="container-settings" class="container"></div>
@@ -424,7 +430,12 @@
                     var body = tinymce.get('content').getContent();
                     var tags = $("#tags").val();
 
+                    $("#new").hide();
+                    $(".loading").show();
+
                     $.post("<?php echo base_url('index.php/faq/add'); ?>",{subject:subject,body:body,tags:tags},function(data){
+                        $(".loading").hide();
+                        $("#new").show();
                         alert("A new workaround has been added successfully.");
                         $("#subject").val("");
                         $("#content").val("");
