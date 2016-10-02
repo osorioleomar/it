@@ -421,7 +421,7 @@
                 if($("#subject").val() !="" || $("#content").val() != ""){
 
                     var subject = $("#subject").val();
-                    var body = $("#content").val();
+                    var body = tinymce.get('content').getContent();
                     var tags = $("#tags").val();
 
                     $.post("<?php echo base_url('index.php/faq/add'); ?>",{subject:subject,body:body,tags:tags},function(data){
@@ -429,6 +429,7 @@
                         $("#subject").val("");
                         $("#content").val("");
                         $("#tags").val("");
+                        hide_forms();
                     });
                 }else{
                     alert("You need to fill-out the title and the content.");
