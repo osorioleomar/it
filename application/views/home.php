@@ -195,6 +195,8 @@
             $("#container-devices").fadeOut();
             $("#container-settings").fadeOut();
             $("#container-logs").fadeIn("medium");
+            $(".active").removeClass("active");
+            $("#ipmanagement").addClass("active");
         }
 
         $(document).on("click","#changePasswordTrigger",function(){
