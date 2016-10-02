@@ -40,4 +40,4 @@
 	<span class="input-group-addon">Mac Address</span>
 	<input class="form-control" type="text" id="macaddress" placeholder="xx:xx:xx:xx:xx:xx" />
 </div>
-<button class="btn btn-raised btn-primary" id="registernewip"><span><i class="glyphicon glyphicon-save"></i></span> Register</button>
+<button class="btn btn-raised btn-primary" id="registernewip"><span><i class="fa fa-save"></i></span> Register</button>

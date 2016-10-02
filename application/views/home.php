@@ -134,7 +134,7 @@
 <!-- End of Modal -->
 
 <div class="wrapper">
-	<div class="row" id="container-faq">
+	<div class="row container" id="container-faq">
 		<div class="col-xs-3 faq-category">
 			<div class="form-group label-floating">
 				<label class="control-label">Search for a keyword</label>
@@ -156,10 +156,10 @@
             </div>
 		</div>
 	</div>
-    <div id="container-active-ip"></div>
-    <div id="container-devices"></div>
-    <div id="container-settings"></div>
-    <div id="container-logs"></div>
+    <div id="container-active-ip" class="container"></div>
+    <div id="container-devices" class="container"></div>
+    <div id="container-settings" class="container"></div>
+    <div id="container-logs" class="container"></div>
 </div>
 
     <script src="assets/js/jquery.min.js" type="text/javascript"></script>
@@ -173,8 +173,7 @@
         * then fades in the new ajax page
         */
         var view_active_ip = function(){
-            $("#container-faq").fadeOut("medium");
-            $("#container-settings").fadeOut();
+            $(".container").fadeOut("medium");
             $("#container-active-ip").load("<?php echo base_url('index.php/iplog') ?>");
             $("#container-active-ip").fadeIn("medium");
             $(".active").removeClass("active");
@@ -182,21 +181,16 @@
         }
 
         var viewSettings = function(){
-            $("#container-faq").fadeOut();
-            $("#container-active-ip").fadeOut();
-            $("#container-devices").fadeOut();
+            $(".container").fadeOut("medium");
             $("#container-settings").fadeIn("medium");
             $("#container-settings").load("<?php echo base_url('index.php/settings') ?>");
         }
 
         var viewLogs = function(){
-            $("#container-faq").fadeOut();
-            $("#container-active-ip").fadeOut();
-            $("#container-devices").fadeOut();
-            $("#container-settings").fadeOut();
+            $(".container").fadeOut("medium");
             $("#container-logs").fadeIn("medium");
             $(".active").removeClass("active");
-            $("#ipmanagement").addClass("active");
+            $("#ipmanagement").addClass("active"); 
         }
 
         $(document).on("click","#changePasswordTrigger",function(){
@@ -531,10 +525,13 @@
             */
             $(document).on("click",".delete",function(){
                 var ip = $(this).attr("data");
-                $.post("<?php echo base_url('index.php/iplog/set_inactive'); ?>",{ip:ip},function(data){
-                    alert(ip + " is now unassigned.");
-                    $("#container-active-ip").load("<?php echo base_url('index.php/iplog') ?>");
-                });
+                var c = confirm("Are you sure you want to remove the assignment in " + ip + "?");
+                if(c){
+                    $.post("<?php echo base_url('index.php/iplog/set_inactive'); ?>",{ip:ip},function(data){
+                        alert(ip + " is now unassigned.");
+                        $("#container-active-ip").load("<?php echo base_url('index.php/iplog') ?>");
+                    });                    
+                }
             });
 
             /*

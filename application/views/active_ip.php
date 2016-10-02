@@ -37,7 +37,7 @@
 				echo "<td>" . $row->device . "</td>";
 				echo "<td>" . $row->computername . "</td>";
 				echo "<td>" . $row->macaddress . "</td>";
-				echo "<td><a href='#' class='btn btn-sm delete' data='" . $row->ip . "'><i class='fa fa-trash'></i></a><a href='#' class='btn btn-sm edit' data-toggle='modal' data-target='#editip' data='" . $row->ip . "'><i class='fa fa-edit'></i></a></td>";
+				echo "<td><a href='#' class='text-danger delete' data='" . $row->ip . "'><i class='fa fa-trash'></i></a> | <a href='#' class='text-warning edit' data-toggle='modal' data-target='#editip' data='" . $row->ip . "'><i class='fa fa-edit'></i></a></td>";
 				echo "</tr>";
 			}
 		 ?>
@@ -47,6 +47,7 @@
 
     <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js" type="text/javascript"></script>
    	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/jquery.dataTables.min.js"></script>
+
    	<script type="text/javascript">
    		$(document).ready(function(){
  	  		$("#table_active_ip").DataTable();
