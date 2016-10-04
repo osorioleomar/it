@@ -145,8 +145,6 @@
 
 		<div class="col-xs-9 faq-content">
             <button class="btn btn-primary btn-raised" id="newfaq">Add New</button>
-            <button class="btn btn-success btn-raised" id="save">Save</button>
-            <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
 
             <!-- loading image that should show on every AJAX calls -->
             <img src="assets/images/loading.gif" class"loading" hidden >
@@ -156,6 +154,8 @@
                 <textarea id="content" rows="20" class="form-control" placeholder="Start typing your solution here."></textarea>
                 <input id="tags" class="form-control" placeholder="e.g. Powershell, Network, etc" />
             </div>
+            <button class="btn btn-success btn-raised" id="save">Save</button>
+            <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
             <div class="body">
                 <h2>Use the search box to look for answers.</h2>
             </div>
@@ -175,8 +175,9 @@
     <script>
         tinymce.init({ 
             selector:'textarea',
-            plugins: 'fullscreen image textcolor print preview searchreplace table code',
-            toolbar: 'forecolor backcolor insert code table',
+            plugins: 'fullscreen image print preview searchreplace table code advlist',
+            //toolbar: 'forecolor backcolor insert code table',
+            //advlist_bullet_styles: 'default,circle,disc,square',
         });
     </script>
     <script type="text/javascript">
@@ -288,10 +289,9 @@
 
             /* view devices *not finished yet. */
             $(document).on("click","#viewdevices",function(){
-                $("#container-faq").fadeOut("medium");
+                $(".container").fadeOut("medium");
                 $("#container-active-ip").load("<?php echo base_url('index.php/devices') ?>");
                 $("#container-active-ip").fadeIn("medium");
-                $("#container-settings").fadeOut();
                 $(".active").removeClass("active");
                 $("#assets").addClass("active");
             });
