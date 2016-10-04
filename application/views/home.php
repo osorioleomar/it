@@ -145,8 +145,6 @@
 
 		<div class="col-xs-9 faq-content">
             <button class="btn btn-primary btn-raised" id="newfaq">Add New</button>
-            <button class="btn btn-success btn-raised" id="save">Save</button>
-            <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
 
             <!-- loading image that should show on every AJAX calls -->
             <img src="assets/images/loading.gif" class"loading" hidden >
@@ -156,6 +154,10 @@
                 <textarea id="content" rows="20" class="form-control" placeholder="Start typing your solution here."></textarea>
                 <input id="tags" class="form-control" placeholder="e.g. Powershell, Network, etc" />
             </div>
+
+            <button class="btn btn-success btn-raised" id="save">Save</button>
+            <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
+
             <div class="body">
                 <h2>Use the search box to look for answers.</h2>
             </div>
@@ -177,6 +179,8 @@
             selector:'textarea',
             plugins: 'fullscreen image textcolor print preview searchreplace table code',
             toolbar: 'forecolor backcolor insert code table',
+            browser_spellcheck:true,
+            paste_data_images: true,
         });
     </script>
     <script type="text/javascript">
