@@ -92,7 +92,7 @@
                 </button>
                 <h4 class="modal-title">Update your info</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Username</span>
                     <input class="form-control" type="text" id="user_username" placeholder="<?php echo $this->session->username; ?>" value="<?php echo $this->session->username; ?>" />
@@ -105,7 +105,7 @@
                     <span class="input-group-addon">Retype Password</span>
                     <input class="form-control" type="password" id="user_cpassword" placeholder="**********" />
                 </div>
-                <button class="btn btn-success" id="submituseredit">Submit</button>
+                <button class="btn btn-raised btn-success" id="submituseredit">Submit</button>
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
                 <h4 class="modal-title">Update password</h4>
             </div>
             <div class="modal-body">
-                <span class="text-danger" id="newPasswordError" hidden>This is an error message.</span>
+                <span class="text-danger" id="newPasswordError" hidden>Please try again.</span>
                 <input type="password" class="form-control" type="text" id="newPassword1" placeholder="password" />
                 <input type="password" class="form-control" type="text" id="newPassword1Confirm" placeholder="confirm password" />
                 <button class="btn btn-success btn-raised" id="submitNewPassword">Change</button>
