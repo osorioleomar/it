@@ -14,7 +14,7 @@ class Model_FAQ extends CI_Model{
 
 	function get_FAQ_by_id($id){
 		$this->db->limit(1);
-		$this->db->select('subject,body,id');
+		$this->db->select('subject,body,id,tags');
 		$this->db->where('id',$id);
 		$query = $this->db->get('workarounds');
 
