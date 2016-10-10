@@ -1,0 +1,13 @@
+<?php
+
+class Model_Request extends CI_Model{
+
+	function addRequest($data){
+		$this->db->insert("requests",$data);
+	}
+
+	function cancelRequest($id,$data){
+		$this->db->where("id",$id);
+		$this->db->update("requests",$data);
+	}
+}
