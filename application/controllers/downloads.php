@@ -2,6 +2,12 @@
 
 class Downloads extends CI_Controller{
 
+	function __construct(){
+		parent::__construct();
+
+		$this->load->model("Model_Request");
+	}
+
 	function index(){
 		$this->load->view("request");
 	}
@@ -13,8 +19,6 @@ class Downloads extends CI_Controller{
 			"urgency"=>$this->input->post("urgency"),
 			"requestor"=>$this->input->post("requestor"),
 			);
-
-		$this->load->model('model_requests');
 		$this->model_request->addRequest($data);	
 	}
 }
