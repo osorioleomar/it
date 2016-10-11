@@ -49,6 +49,10 @@
 
         	if(!$("#url").val()){
         		alert("Please type the URL. That is what we need.");
+        	}else if(!tinymce.get('explanation').getContent()){
+        		alert("Please let us know the reason of this download. That's where we will base the importance of it.");
+        	}else if(!$("#requestor").val()){
+        		alert("You forgot to type your name at the last field.");
         	}else{
         		$("#submitButtons").html("Sending it to handsome people in IT. Please wait...");
 
@@ -56,7 +60,7 @@
         		var reason = tinymce.get('explanation').getContent();
         		var urgency = $("#urgency").val();
         		var requestor = $("#requestor").val();
-        		
+        		//alert(url+reason+urgency+requestor);
         		$.post("<?php echo base_url('index.php/downloads/submit') ?>",{url:url,reason:reason,urgency:urgency,requestor:requestor},function(data){
         			alert("Request submitted successfully! We will email you when it's done.");
         			location.reload();

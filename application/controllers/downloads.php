@@ -5,7 +5,7 @@ class Downloads extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 
-		$this->load->model("Model_Request");
+		$this->load->model("requests");
 	}
 
 	function index(){
@@ -19,6 +19,43 @@ class Downloads extends CI_Controller{
 			"urgency"=>$this->input->post("urgency"),
 			"requestor"=>$this->input->post("requestor"),
 			);
-		$this->model_request->addRequest($data);	
+		$this->requests->addRequest($data);
+		$this->emailIT($data);
+	}
+
+	function emailIT($data){
+
+		/*
+		* Setup email configuration
+		* We will be using a gmail account
+		*/
+		$config = Array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'it.cimtechnologies.com@gmail.com',// your mail name
+			'smtp_pass' => 'lite-onitcorp.',
+			'mailtype'  => 'html', 
+			'charset'   => 'iso-8859-1',
+			 'wordwrap' => TRUE
+		);
+
+		/*
+		* Get all the details from the submitted form with the $data array
+		*	Consolidate those details and form an html email
+		*/
+		$message = "Here's a new download request from " . $data['requestor'] . "<br>URLs: " . $data['url'] . "<br>Reason: " . $data['reason'] . "<br>They need it " . $data['urgency'];
+
+		$this->load->library("email",$config);
+		$this->email->set_newline("\r\n");
+	    $this->email->from('it@cimtechnologies.com');
+	    $this->email->to('l.osorio@cimtechnologies.com');
+	    $this->email->subject('New Download Request');
+	    $this->email->message($message);
+	    if($this->email->send()){
+		    echo 'Email sent.';    
+		}else{
+		    show_error($this->email->print_debugger());  
+		}
 	}
 }
