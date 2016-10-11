@@ -32,6 +32,7 @@
                         <li><a href="#" id="viewLogs">Assignment Logs</a></li>
         			</ul>
         		</li>
+                <li id="requestLogs"><a href="#">Download Requests <span class="label label-warning"><?php echo $pendingCount; ?></span></a></li>
     		</ul>
 
     		<ul class="nav navbar-nav navbar-right">
@@ -154,15 +155,10 @@
                 <textarea id="content" rows="20" class="form-control" placeholder="Start typing your solution here."></textarea>
                 <input id="tags" class="form-control" placeholder="e.g. Powershell, Network, etc" />
             </div>
-<<<<<<< HEAD
 
             <button class="btn btn-success btn-raised" id="save">Save</button>
             <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
 
-=======
-            <button class="btn btn-success btn-raised" id="save">Save</button>
-            <button class="btn btn-danger btn-raised" id="cancel">Cancel</button>
->>>>>>> 0ece67987b6f92ac81979e562536b9ef7e43407a
             <div class="body">
                 <h2>Use the search box to look for answers.</h2>
             </div>
@@ -173,6 +169,7 @@
     <div id="container-devices" class="container"></div>
     <div id="container-settings" class="container"></div>
     <div id="container-logs" class="container"></div>
+    <div id="container-requests" class="container"></div>
 </div>
 
     <script src="assets/js/jquery.min.js" type="text/javascript"></script>
@@ -182,16 +179,16 @@
     <script>
         tinymce.init({ 
             selector:'textarea',
-<<<<<<< HEAD
+
             plugins: 'fullscreen image textcolor print preview searchreplace table code',
             toolbar: 'forecolor backcolor insert code table',
             browser_spellcheck:true,
             paste_data_images: true,
-=======
+
             plugins: 'fullscreen image print preview searchreplace table code advlist',
             //toolbar: 'forecolor backcolor insert code table',
             //advlist_bullet_styles: 'default,circle,disc,square',
->>>>>>> 0ece67987b6f92ac81979e562536b9ef7e43407a
+
         });
     </script>
     <script type="text/javascript">
@@ -220,6 +217,13 @@
             $("#container-logs").fadeIn("medium");
             $(".active").removeClass("active");
             $("#ipmanagement").addClass("active"); 
+        }
+
+        var viewRequests = function(){
+            $(".container").fadeOut("medium");
+            $("#container-requests").fadeIn("medium");
+            $(".active").removeClass("active");
+            $("#requestLogs").addClass("active"); 
         }
 
         $(document).on("click","#changePasswordTrigger",function(){
@@ -350,7 +354,40 @@
                     $("#container-logs").html(data);
                     viewLogs();
                 },"html");
-            })
+            });
+
+            /*
+            * This function will fetch all pending logs
+            *
+            */
+            $(document).on("click","#requestLogs",function(){
+                $.get("<?php echo base_url('index.php/downloads/pending') ?>",function(data){
+                    $("#container-requests").html(data);
+                    viewRequests();
+                },"html")
+            });
+
+            /*
+            * This function will fetch all request from the log ordered by id DESC
+            * Triggered when VIEW ALL button is clicked
+            */
+            $(document).on("click","#allRequest",function(){
+                $.get("<?php echo base_url('index.php/downloads/all') ?>",function(data){
+                    $("#container-requests").html(data);
+                    viewRequests();
+                },"html")
+            });
+
+            /*
+            * This function will fetch all pending request from the log ordered by id DESC
+            * Triggered when VIEW ALL button is clicked
+            */
+            $(document).on("click","#pendingRequest",function(){
+                $.get("<?php echo base_url('index.php/downloads/pending') ?>",function(data){
+                    $("#container-requests").html(data);
+                    viewRequests();
+                },"html")
+            });
 /*-------------------------------------------------------*/
 
 /*----------FUNCTIONS FOR ADDING NEW OBJECTS----------------*/
@@ -546,7 +583,19 @@
                         $("#newPassword1Confirm").val("");
                     });
                 }
-            })
+            });
+
+            $(document).on("click",".markDone",function(){
+                var c = confirm("Click YES if the user has the downloaded files.");
+                if(c){
+                    var id = $(this).attr("id");
+                    $.get("<?php echo base_url('index.php/downloads/mark') ?>/" + id,function(){
+                        $.get("<?php echo base_url('index.php/downloads/pending') ?>",function(data){
+                            $("#container-requests").html(data);
+                        },"html");
+                    });
+                }
+            });
 
 /*----------END OF FUNCTIONS FOR MODIFYING OBJECTS----------------*/
 

@@ -13,7 +13,7 @@
 				<p>&nbsp;</p>
 				<textarea class="form-control" id="url" placeholder="Paste the urls here"></textarea>
 				<p>&nbsp;</p>
-				<p style="text-align:left">Tell us why you need this download.</p>
+				<p style="text-align:left">Tell us about the download and why you need it.</p>
 				<textarea id="explanation" class="form-control" placeholder="Tell us why do you need this download."></textarea>
 				<p>&nbsp;</p>
 				<div class="col-sm-4">
@@ -37,7 +37,9 @@
 			<div class="col-sm-3"></div>
 		</div>
 	</div>
-
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <script src="<?php echo base_url('/assets/js/jquery.min.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('/assets/js/tinymce/tinymce.min.js'); ?>"></script>
     <script>
@@ -54,7 +56,7 @@
         	}else if(!$("#requestor").val()){
         		alert("You forgot to type your name at the last field.");
         	}else{
-        		$("#submitButtons").html("Sending it to handsome people in IT. Please wait...");
+        		$("#submitButtons").html("<img src='<?php echo base_url() ?>/assets/images/pleasewait.gif' height='40px'>");
 
         		var url = $("#url").val();
         		var reason = tinymce.get('explanation').getContent();
@@ -68,28 +70,6 @@
         	}
 
         })
-
-        /*        if($("#subject").val() !="" || $("#content").val() != ""){
-
-                    var subject = $("#subject").val();
-                    var body = tinymce.get('content').getContent();
-                    var tags = $("#tags").val();
-
-                    $("#new").hide();
-                    $(".loading").show();
-
-                    $.post("<?php echo base_url('index.php/faq/add'); ?>",{subject:subject,body:body,tags:tags},function(data){
-                        $(".loading").hide();
-                        $("#new").show();
-                        alert("A new workaround has been added successfully.");
-                        $("#subject").val("");
-                        $("#content").val("");
-                        $("#tags").val("");
-                        hide_forms();
-                    });
-                }else{
-                    alert("You need to fill-out the title and the content.");
-                }*/
     </script>
 	</div>
 </body>

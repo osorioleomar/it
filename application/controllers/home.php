@@ -14,9 +14,10 @@ class Home extends CI_Controller{
 	}
 
 	function index(){
-
+		$this->load->model('requests');
 		$data = array(
 			'faq' => $this->model_faq->search($this->input->post('keyword')),
+			'pendingCount'=> $this->requests->getPending()->num_rows(),
 			);
 
 		$this->load->view('template/header');
