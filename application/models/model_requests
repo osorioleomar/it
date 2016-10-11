@@ -1,6 +1,7 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_Request extends CI_Model{
+class Model_Requests extends CI_Model{
 
 	function addRequest($data){
 		$this->db->insert("requests",$data);
